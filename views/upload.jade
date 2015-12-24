@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1 New Item
+  form(id="form1",action="upload/new")
+    input(id="imgInp",type="file", accept="image/*")
+    br/
+    br/
+    img(width="320px",src="#", id="imgPreview",alt="Please select an image")
+    br/
+    br/
+    input(type="submit",value="Upload")
+  script(src="javascripts/image_preview.js")
+  script(type="text/javascript").
+      image_preview("#imgInp", "#imgPreview")
