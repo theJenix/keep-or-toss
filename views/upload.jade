@@ -2,8 +2,8 @@ extends layout
 
 block content
   h1 New Item
-  form(id="form1",action="upload/new")
-    input(id="imgInp",type="file", accept="image/*")
+  form(id="form1",action="upload/new",enctype="multipart/form-data",method="post")
+    input(id="imgInp",name="image",type="file", accept="image/*")
     br/
     br/
     img(width="320px",src="#", id="imgPreview",alt="Please select an image")
