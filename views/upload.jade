@@ -2,7 +2,7 @@ extends layout
 
 block content
   h1 New Item
-  form(id="form1",action="upload/new",enctype="multipart/form-data",method="post")
+  form(id="form1",action="new",enctype="multipart/form-data",method="post")
     input(id="imgInp",name="image",type="file", accept="image/*")
     br/
     br/
@@ -10,6 +10,6 @@ block content
     br/
     br/
     input(type="submit",value="Upload")
-  script(src="javascripts/image_preview.js")
+  script(src="../javascripts/image_preview.js")
   script(type="text/javascript").
       image_preview("#imgInp", "#imgPreview")
