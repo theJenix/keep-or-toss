@@ -42,6 +42,11 @@ router.post('/add', function(req, res) {
   });
 });
 
+/* Remove list */
+router.post('/remove', function(req, res) {
+  res.send(req.body.listName);
+})
+
 /* Show list page */
 router.get('/:listname/:selection', function(req, res) {
   var store = storage(root + '/' + req.params.listname + '/' + req.params.selection);

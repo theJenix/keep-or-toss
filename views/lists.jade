@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1= title
+  ul
+    each val in lists
+      li
+        p #{val} 
+          a(href='javascript: $.post("/lists/remove", {listName: "#{val}"})') (x)
