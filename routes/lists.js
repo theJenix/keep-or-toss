@@ -1,12 +1,9 @@
 var express  = require('express');
 var fs       = require('fs'); // To clean up multer temp storage
 var multer   = require('multer');
-var storage  = require('./storage_local');
+var storage  = require('./list_storage_local');
 
 var router = express.Router();
-
-var root = './uploads/lists'
-var list_storage = storage(root);
 
 
 var withErrHandler = function(res, code, callback) {
@@ -23,10 +20,8 @@ var withErrHandler = function(res, code, callback) {
 
 /* List of lists page */
 router.get('/', function(req, res) {
-  list_storage.make_root(function() {
-    list_storage.list(withErrHandler(res, 500, function(lists) {
-      res.render('lists', { title: "Lists", lists: lists });
-    }));
+  list_storage.list_lists(withErrHandler(res, 500, function(lists) {
+    res.render('lists', { title: "Lists", lists: lists });
   });
 });
 
@@ -36,21 +31,21 @@ router.get('/add', function(req, res) {
 });
 
 router.post('/add', function(req, res) {
-  var store = storage(root + '/' + req.body.listName);
-  store.make_root(function() {
-    res.send(req.body.listName);
+  storage.add_list(req.body.listName, withErrHandler(res, 500, function(list_name) {
+    res.send(list_name);
   });
 });
 
 /* Remove list */
 router.post('/remove', function(req, res) {
-  res.send(req.body.listName);
-})
+  storage.remove_list(req.body.listName, withErrHandler(res, 500, function(list_name) {
+    res.send(list_name);
+  });
+});
 
 /* Show list page */
 router.get('/:listname/:selection', function(req, res) {
-  var store = storage(root + '/' + req.params.listname + '/' + req.params.selection);
-  store.list(withErrHandler(res, 500, function(files) {
+  storage.show_list(req.params.listname, req.params.selection, withErrHandler(res, 500, function(files) {
     res.render('files', { title: req.params.listname + ' ' + req.params.selection, files: files });
   }));
 });
