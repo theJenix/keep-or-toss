@@ -24,17 +24,21 @@ var withErrHandler = function(res, code, callback) {
 /* List of lists page */
 router.get('/', function(req, res) {
   list_storage.make_root(function() {
-    list_storage.list(withErrHandler(res, 500, function(files) {
-      res.render('files', { title: "Lists", files: files });
+    list_storage.list(withErrHandler(res, 500, function(lists) {
+      res.render('lists', { title: "Lists", lists: lists });
     }));
   });
 });
 
 /* Add list */
-router.post('/add/:listname', function(req, res) {
-  var store = storage(root + '/' + req.params.listname);
+router.get('/add', function(req, res) {
+  res.render('add_list');
+});
+
+router.post('/add', function(req, res) {
+  var store = storage(root + '/' + req.body.listName);
   store.make_root(function() {
-    res.send(req.params.listname);
+    res.send(req.body.listName);
   });
 });
 
