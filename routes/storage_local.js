@@ -12,12 +12,7 @@ module.exports = function(root) {
     },
 
     save: function(name, path, callback) {
-      var mode = 0744;
-      fs.exists(root, function (exists) {
-        if (!exists) {
-          console.log("Doesnt exist!");
-          fs.mkdirSync(root, mode);
-        }
+      this.make_root(function () {
         fs.readFile(path, function (err, data) {
           if (err) {
             callback(err, null);
@@ -34,12 +29,7 @@ module.exports = function(root) {
     },
 
     transfer: function(name, store, callback) {
-      var mode = 0744;
-      fs.exists(root, function (exists) {
-        if (!exists) {
-          console.log("Doesnt exist!");
-          fs.mkdirSync(root, mode);
-        }
+      this.make_root(function () {
         var path = root + "/" + name;
         store.save(name, path, function (err, new_name) {
           if (!err) {
@@ -57,6 +47,16 @@ module.exports = function(root) {
           console.log(err);
           callback(err);
         });*/
+      });
+    },
+
+    make_root: function(callback) {
+      var mode = 0744;
+      fs.exists(root, function (exists) {
+        if (!exists) {
+          fs.mkdirSync(root, mode);
+        }
+        callback();
       });
     }
   }
