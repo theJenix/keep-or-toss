@@ -19,7 +19,7 @@ module.exports = {
 
   remove_list: function(list_name, callback) {
     callback(null, list_name)
-  }
+  },
 
   show_list: function(list_name, selection, callback) {
     var store = storage(root + '/' + list_name + '/' + selection);

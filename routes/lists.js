@@ -20,9 +20,9 @@ var withErrHandler = function(res, code, callback) {
 
 /* List of lists page */
 router.get('/', function(req, res) {
-  list_storage.list_lists(withErrHandler(res, 500, function(lists) {
+  storage.list_lists(withErrHandler(res, 500, function(lists) {
     res.render('lists', { title: "Lists", lists: lists });
-  });
+  }));
 });
 
 /* Add list */
@@ -33,14 +33,14 @@ router.get('/add', function(req, res) {
 router.post('/add', function(req, res) {
   storage.add_list(req.body.listName, withErrHandler(res, 500, function(list_name) {
     res.send(list_name);
-  });
+  }));
 });
 
 /* Remove list */
 router.post('/remove', function(req, res) {
   storage.remove_list(req.body.listName, withErrHandler(res, 500, function(list_name) {
     res.send(list_name);
-  });
+  }));
 });
 
 /* Show list page */
