@@ -6,5 +6,6 @@ block content
   ul
     each val in lists
       li
-        p #{val} 
+        p
+          a(href='/lists/#{val}/todo') #{val} 
           //- a(href='javascript: $.post("/lists/remove", {listName: "#{val}"})') (x)
