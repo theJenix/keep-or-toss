@@ -1,8 +1,16 @@
 extends layout
 
 block content
+  script(type="text/javascript").
+    function makeList() {
+      $.post("/lists/add", {"listName": this.imgInp.value}, function (data, status) {
+        window.location = "/lists";
+      });
+      return true;
+    }
+
   h1 New List
-  form(id="form1", method="post")
+  form(id="form1", onsubmit="makeList()")
     input(id="imgInp", name="listName", type="text")
     br/
-    input(type="submit", value="Upload")
+    input(type="submit", value="Create")
