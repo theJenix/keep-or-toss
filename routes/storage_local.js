@@ -8,7 +8,8 @@ module.exports = function(root) {
     },
 
     load: function(name, callback) {
-      callback(null, root + "/" + name);
+      fs.readFile(root + "/" + name, callback);
+      // callback(null, root + "/" + name);
     },
 
     save: function(name, path, callback) {

@@ -2,6 +2,6 @@ extends layout
 
 block content
   h1= title
-  ul
-    each val in files
-      li= val
+
+  each val in files
+    img.thumbnail(src="#{root}/#{val}")

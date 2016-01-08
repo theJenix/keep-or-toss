@@ -46,7 +46,20 @@ router.post('/remove', function(req, res) {
 /* Show list page */
 router.get('/:listname/:selection', function(req, res) {
   storage.show_list(req.params.listname, req.params.selection, withErrHandler(res, 500, function(files) {
-    res.render('files', { title: req.params.listname + ' ' + req.params.selection, files: files });
+    var data = {
+      title: req.params.listname + ' ' + req.params.selection,
+      files: files,
+      root: '/lists/' + req.params.listname + '/' + req.params.selection
+    }
+    res.render('files', data);
+  }));
+});
+
+/* Get image */
+router.get('/:listname/:selection/:filename', function(req, res) {
+  storage.get_image(req.params.listname, req.params.selection, req.params.filename, withErrHandler(res, 500, function(img) {
+    res.writeHead(200, {'Content-Type': 'image/gif' });
+    res.end(img, 'binary');
   }));
 });
 

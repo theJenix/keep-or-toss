@@ -38,5 +38,10 @@ module.exports = {
   show_list: function(list_name, selection, callback) {
     var store = storage(root + '/' + list_name + '/' + selection);
     store.list(callback);
+  },
+
+  get_image: function(list_name, selection, file_name, callback) {
+    var store = storage(root + '/' + list_name + '/' + selection);
+    store.load(file_name, callback);
   }
 }
