@@ -6,11 +6,11 @@ block content
       $.post("/lists/add", {"listName": this.imgInp.value}, function (data, status) {
         window.location = "/lists";
       });
-      return true;
+      return false;
     }
 
   h1 New List
-  form(id="form1", onsubmit="makeList()")
+  form(id="form1", onsubmit="return makeList()")
     input(id="imgInp", name="listName", type="text")
     br/
     input(type="submit", value="Create")
